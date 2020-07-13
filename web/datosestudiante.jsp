@@ -13,6 +13,7 @@
             PreparedStatement pst;
             ResultSet rs;
             String s_accion;
+            String s_idestudiante;
 
         %>
     </head>
@@ -40,6 +41,21 @@
             try{
                 ConectaBd bd = new ConectaBd();
                 cn = bd.getConnection();
+                
+                s_accion = request.getParameter("f_accion");
+                s_idestudiante = request.getParameter("f_idestudiante");
+                
+                if (s_accion !=null) {
+                    if (s_accion.equals("E")) {
+                            consulta =    " delete from estudiante "
+                                        + " where  "
+                                        + " idestudiante = " + s_idestudiante +"; ";
+                            //out.print(consulta);
+                            pst = cn.prepareStatement(consulta);
+                            pst.executeUpdate();
+                    }                    
+                }
+                
                 consulta= " Select idestudiante, nombre, apellidos, dni, codigo, estado "
                         + " from estudiante ";
                 //out.print(consulta);
