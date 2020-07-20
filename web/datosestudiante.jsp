@@ -9,6 +9,7 @@
         <title>Datos Estudiante</title>
         <link href="css/Estilosparatabla.css" rel="stylesheet" type="text/css"/>
         <%!
+            // Variables globales (Página)
             String consulta;
             Connection cn;
             PreparedStatement pst;
@@ -31,6 +32,7 @@
                 cn = bd.getConnection();
                 s_accion = request.getParameter("f_accion");
                 s_idestudiante = request.getParameter("f_idestudiante");
+                // Primera parte del modificar
                 if (s_accion!=null && s_accion.equals("M1")) {
                     consulta =  "   select nombre, apellidos, dni, codigo, estado  "
                                 + " from estudiante  "
@@ -87,6 +89,8 @@
                     <%
                         }
                 }else{
+                // Si no se hace la primera parte del modidicar debe mostrar el 
+                // formulario de agregar estudiante
 
         %>
         <form name="AgregarEstudianteForm" action="datosestudiante.jsp" method="GET">
@@ -157,6 +161,8 @@
                 
                 
                 if (s_accion !=null) {
+                    
+                    // Ejecutar la eliminación de estudiantes
                     if (s_accion.equals("E")) {
                             consulta =    " delete from estudiante "
                                         + " where  "
@@ -164,6 +170,8 @@
                             //out.print(consulta);
                             pst = cn.prepareStatement(consulta);
                             pst.executeUpdate();
+                    // Sino se elimina registros de estudiantes, 
+                    // Pregunta si se va a REGISTRAR UN NUEVO ESTUDIANTE
                     }else if(s_accion.equals("C")){
                             s_nombre = request.getParameter("f_nombre");
                             s_apellidos = request.getParameter("f_apellidos");
@@ -177,6 +185,8 @@
                             //out.print(consulta);
                             pst = cn.prepareStatement(consulta);
                             pst.executeUpdate();
+                    // Si no se está creando o eliminando registro de estudiante
+                    // Pregunta si va a hacer la MODIFICACIÓN DE ESTUDIANTES - Parte 2
                     }else if (s_accion.equals("M2")) {
                             s_nombre = request.getParameter("f_nombre");
                             s_apellidos = request.getParameter("f_apellidos");
@@ -199,6 +209,7 @@
                     
                 }
                 
+                // Listar los estudiantes de la TABLA ESTUDIANTE
                 consulta= " Select idestudiante, nombre, apellidos, dni, codigo, estado "
                         + " from estudiante ";
                 //out.print(consulta);
@@ -223,6 +234,7 @@
                     </tr>                    
                     <%
                     }
+                    // Se cierra todas las conexiones
                     rs.close();
                     pst.close();
                     cn.close();
