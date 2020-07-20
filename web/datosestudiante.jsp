@@ -90,7 +90,7 @@
 
         %>
         <form name="AgregarEstudianteForm" action="datosestudiante.jsp" method="GET">
-            <table border="0" align="center" style="margin: auto; display: table">
+            <table border="0" align="center" class="ecologico" style="margin: auto; display: table">
                 <thead>
                     <tr>
                         <th colspan="2">Agregar Estudiante</th>
@@ -133,7 +133,7 @@
             }
         %>
         
-        <table border="1" cellspacing="0" cellpadding="" align = "center">
+        <table border="1" cellpadding ="2" align = "center" class="ecologico" style="margin: auto; display: table" >
             <thead>
                 <tr>
                     <th colspan="8">
